@@ -1,23 +1,20 @@
 <template>
   <div class="app-container">
-    讲师列表
+    banner列表
 
     <!--查询表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-input v-model="teacherQuery.name" placeholder="讲师名" />
+        <el-input v-model="bannerQuery.title" placeholder="banner标题" />
       </el-form-item>
 
       <el-form-item>
-        <el-select v-model="teacherQuery.level" clearable placeholder="讲师头衔">
-          <el-option :value="1" label="高级讲师" />
-          <el-option :value="2" label="首席讲师" />
-        </el-select>
+        <el-input v-model="bannerQuery.linkUrl" placeholder="banner链接" />
       </el-form-item>
 
       <el-form-item label="添加时间">
         <el-date-picker
-          v-model="teacherQuery.begin"
+          v-model="bannerQuery.begin"
           type="datetime"
           placeholder="选择开始时间"
           value-format="yyyy-MM-dd HH:mm:ss"
@@ -26,7 +23,7 @@
       </el-form-item>
       <el-form-item>
         <el-date-picker
-          v-model="teacherQuery.end"
+          v-model="bannerQuery.end"
           type="datetime"
           placeholder="选择截止时间"
           value-format="yyyy-MM-dd HH:mm:ss"
@@ -56,15 +53,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="name" label="名称" width="80" />
+      <el-table-column prop="title" label="标题" width="80" />
 
-      <el-table-column label="头衔" width="80">
-        <template slot-scope="scope">
-          {{ scope.row.level===1?'高级讲师':'首席讲师' }}
-        </template>
-      </el-table-column>
+      <el-table-column prop="linkUrl" label="链接" />
 
-      <el-table-column prop="intro" label="资历" />
+      <el-table-column prop="linkUrl" label="图片" />
 
       <el-table-column prop="gmtCreate" label="添加时间" width="160" />
 
@@ -106,7 +99,7 @@ export default {
       page: 1, // 当前页
       limit: 10, // 每页记录数
       total: 0, // 总记录数
-      teacherQuery: {} // 条件封装对象
+      bannerQuery: {} // 条件封装对象
     }
   },
   created() { // 页面渲染之前执行，一般调用methods定义的方法
@@ -117,7 +110,7 @@ export default {
     // 讲师列表的方法
     getList(page = 1) {
       this.page = page
-      teacher.getTeacherListPage(this.page, this.limit, this.teacherQuery)
+      teacher.getTeacherListPage(this.page, this.limit, this.bannerQuery)
         .then(response => {
           // 请求成功
           // response接口返回的数据
@@ -128,7 +121,7 @@ export default {
     },
     resetData() { // 清空的方法
       // 表单输入项数据清空
-      this.teacherQuery = {}
+      this.bannerQuery = {}
       // 查询所有讲师数据
       this.getList()
     },
