@@ -116,7 +116,7 @@ export default {
             teacherList:[],//封装所有的讲师
             subjectOneList:[],//一级分类
             subjectTwoList:[]//二级分类
-        }   
+        }
     },
     created() {
         //获取路由id值

@@ -75,7 +75,7 @@ export const asyncRoutes = [
                 meta: { title: '添加讲师', icon: 'tree' }
             },
             {
-                path: 'edit/:id',
+                path: 'save/:id',
                 name: 'EduTeacherEdit',
                 component: () =>
                     import ('@/views/edu/teacher/save'),

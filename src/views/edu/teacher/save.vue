@@ -154,7 +154,7 @@ export default {
           message: "修改成功!",
         });
         //回到列表页面 路由跳转
-        this.$router.push({ path: "/teacher/list" });
+        this.$router.push({ path: "/edu/teacher/list" });
       });
     },
     //添加讲师的方法
