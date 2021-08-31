@@ -43,7 +43,7 @@ export default {
             message: '生成数据成功!'
           })
           // 跳转到图表显示页面
-          this.$router.push({ path: 'edu/statistics/show' })
+          this.$router.push({ path: '/edu/statistics/show' })
         })
     }
   }

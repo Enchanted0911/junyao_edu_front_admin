@@ -84,6 +84,37 @@ export const asyncRoutes = [
             }
         ]
     },
+    // banner管理
+    {
+        path: '/banner',
+        component: Layout,
+        redirect: '/banner/list',
+        name: 'banner管理',
+        meta: { title: 'banner管理', icon: 'example' },
+        children: [{
+                path: 'list',
+                name: 'banner列表',
+                component: () =>
+                    import ('@/views/edu/banner/list'),
+                meta: { title: 'banner列表', icon: 'table' }
+            },
+            {
+                path: 'info',
+                name: '添加banner',
+                component: () =>
+                    import ('@/views/edu/banner/info'),
+                meta: { title: '添加banner', icon: 'tree' }
+            },
+            {
+                path: 'info/:id',
+                name: '编辑banner',
+                component: () =>
+                    import ('@/views/edu/banner/info'),
+                meta: { title: '编辑banner', noCache: true },
+                hidden: true
+            }
+        ]
+    },
 
     {
         path: '/subject',
