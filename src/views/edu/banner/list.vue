@@ -57,16 +57,21 @@
 
       <el-table-column prop="linkUrl" label="链接" width="80" />
 
-      <el-table-column prop="imageUrl" label="图片" >
-
+      <el-table-column label="图片" width="300" align="center">
+        <template slot-scope="scope">
+          <div v-viewer="{movable: false}" class="image">
+            <img :key="scope.row.imageUrl" :src="scope.row.imageUrl" style="width:200px">
+          </div>
+        </template>
       </el-table-column>
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160" />
+      <el-table-column prop="gmtCreate" label="添加时间" width="160" sortable />
 
-      <el-table-column prop="sort" label="排序" width="60" />
+      <el-table-column prop="sort" label="排序" width="80" sortable align="center" />
 
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
+          <el-button type="info" size="mini" icon="el-icon-view" @click="show()">预览</el-button>
           <router-link :to="'/edu/banner/info/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
@@ -89,7 +94,7 @@
 </template>
 <script>
 import banner from '@/api/edu/banner'
-
+import { directive as viewer } from 'v-viewer'
 export default {
   // 写核心代码位置
   // data:{
@@ -107,7 +112,16 @@ export default {
     // 调用
     this.getList()
   },
+  directives: {
+    viewer: viewer({
+      debug: true
+    })
+  },
   methods: {
+    show() {
+      const viewer = this.$el.querySelector('.image').$viewer
+      viewer.show()
+    },
     getList(page = 1) {
       this.page = page
       banner.getBannerListPage(this.page, this.pageSize, this.bannerQuery)

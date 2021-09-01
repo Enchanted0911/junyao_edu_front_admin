@@ -16,10 +16,32 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import { hasBtnPermission } from './utils/permission' // button permission
 
-Vue.use(ElementUI, { locale })
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+
+Vue.use(ElementUI, { locale }, Viewer)
 
 Vue.config.productionTip = false
 Vue.prototype.hasPerm = hasBtnPermission
+
+Viewer.setDefaults({
+  Options: {
+    'inline': false,
+    'button': false,
+    'navbar': false,
+    'title': false,
+    'toolbar': false,
+    'tooltip': false,
+    'movable': false,
+    'zoomable': false,
+    'rotatable': false,
+    'scalable': false,
+    'transition': false,
+    'fullscreen': false,
+    'keyboard': false,
+    'url': 'data-source'
+  }
+})
 
 new Vue({
   el: '#app',
