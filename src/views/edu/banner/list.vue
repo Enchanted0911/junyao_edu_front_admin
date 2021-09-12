@@ -59,7 +59,7 @@
 
       <el-table-column label="图片" width="300" align="center">
         <template slot-scope="scope">
-          <div v-viewer="{movable: false}" class="image">
+          <div v-viewer="{movable: false}" :class="'image' + scope.$index">
             <img :key="scope.row.imageUrl" :src="scope.row.imageUrl" style="width:200px">
           </div>
         </template>
@@ -71,7 +71,7 @@
 
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button type="info" size="mini" icon="el-icon-view" @click="show()">预览</el-button>
+          <el-button type="info" size="mini" icon="el-icon-view" @click="show(scope.$index)">预览</el-button>
           <router-link :to="'/edu/banner/info/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
@@ -96,9 +96,6 @@
 import banner from '@/api/edu/banner'
 import { directive as viewer } from 'v-viewer'
 export default {
-  // 写核心代码位置
-  // data:{
-  // },
   data() { // 定义变量和初始值
     return {
       items: null, // 查询之后接口返回集合
@@ -118,8 +115,8 @@ export default {
     })
   },
   methods: {
-    show() {
-      const viewer = this.$el.querySelector('.image').$viewer
+    show(index) {
+      const viewer = this.$el.querySelector('.image' + index).$viewer
       viewer.show()
     },
     getList(page = 1) {
